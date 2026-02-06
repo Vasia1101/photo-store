@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: photo_pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: photo_store
+      POSTGRES_USER: photo_user
+      POSTGRES_PASSWORD: photo_pass
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  strapi:
+    build: ./backend/strapi
+    container_name: photo_strapi
+    restart: unless-stopped
+    env_file:
+      - ./backend/strapi/.env
+    volumes:
+      - ./backend/strapi:/app
+      - /app/node_modules
+      - ./uploads:/app/public/uploads
+    ports:
+      - "1337:1337"
+    depends_on:
+      - postgres
+
+volumes:
+  pg_data:

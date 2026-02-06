@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "download_tokens",
+  "info": {
+    "singularName": "download-token",
+    "pluralName": "download-tokens",
+    "displayName": "DownloadToken"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tokenHash": {
+      "type": "string",
+      "unique": true
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::order.order",
+      "inversedBy": "download_tokens"
+    },
+    "expiresAt": {
+      "type": "datetime"
+    },
+    "maxDownloads": {
+      "type": "integer",
+      "default": 5
+    },
+    "downloadCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "lastDownloadAt": {
+      "type": "datetime"
+    },
+    "isRevoked": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

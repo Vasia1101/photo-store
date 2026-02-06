@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "orderNumber": {
+      "type": "string",
+      "unique": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "orderStatus": {
+      "type": "enumeration",
+      "default": "created",
+      "enum": [
+        "created",
+        "paid",
+        "failed",
+        "refunded",
+        "expired"
+      ]
+    },
+    "provider": {
+      "type": "enumeration",
+      "enum": [
+        "stripe",
+        "liqpay",
+        "wayforpay"
+      ]
+    },
+    "providerPaymentId": {
+      "type": "string"
+    },
+    "amountCents": {
+      "type": "integer"
+    },
+    "currency": {
+      "type": "enumeration",
+      "enum": [
+        "USD",
+        "EUR"
+      ]
+    },
+    "items": {
+      "type": "json"
+    },
+    "paidAt": {
+      "type": "datetime"
+    },
+    "download_tokens": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::download-token.download-token",
+      "mappedBy": "orders"
+    }
+  }
+}
