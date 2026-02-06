@@ -1,0 +1,20 @@
+# deps
+node_modules
+
+# env
+.env
+.env.local
+
+# next
+.next
+out
+
+# strapi
+backend/strapi/.cache
+backend/strapi/build
+
+# uploads (private originals)
+uploads
+
+# logs
+*.log
